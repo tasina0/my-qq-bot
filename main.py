@@ -10,7 +10,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.cron import CronTrigger
 
 from astrbot.api import llm_tool, logger
-from astrbot.api.event import AstrMessageEvent, MessageEventResult
+from astrbot.api.event import AstrMessageEvent, MessageEventResult, MessageChain
 from astrbot.api.all import event_message_type, EventMessageType
 from astrbot.api.message_components import Image, Plain
 from astrbot.api.star import Context, Star, register
@@ -200,19 +200,25 @@ class MyQQBotPlugin(Star):
     async def send_scheduled_message(self, target, send_items):
         """发送定时消息"""
         for item in send_items:
-            reply_chain = []
+            reply_chain = MessageChain()
             
             # 添加文本
             if item.get("text"):
-                reply_chain.append(Plain(text=item["text"]))
+                reply_chain.extend([
+                    Plain(text=item["text"])
+                ])
             
             # 添加图片
             if item.get("images"):
                 for image_url in item["images"]:
                     if image_url.startswith(('http://', 'https://')):
-                        reply_chain.append(Image.fromURL(url=image_url))
+                        reply_chain.extend([
+                            Image.fromURL(url=image_url)
+                        ])
                     else:
-                        reply_chain.append(Image.fromLocal(path=image_url))
+                        reply_chain.extend([
+                            Image.fromLocal(path=image_url)
+                        ])
             
             # 发送消息
             if reply_chain:
