@@ -215,7 +215,7 @@ class MyQQBotPlugin(Star):
                 chain.chain.extend(reply_chain)
                 try:
                     # 使用 API 发送消息到指定目标
-                    await self.context.send_message(target, reply_chain)
+                    await self.context.send_message(target, chain)
                     logger.info(f"已发送定时消息到 {target}")
                 except Exception as e:
                     logger.error(f"发送定时消息失败: {str(e)}")
