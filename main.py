@@ -34,7 +34,7 @@ class MyQQBotPlugin(Star):
         """返回一张随机图片。
 
         Args:
-            category: 图片分类，可选值为:
+            category(string): 图片分类，可选值为:
 
                 - "老婆"
                 - "豆豆"
