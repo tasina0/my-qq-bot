@@ -93,6 +93,7 @@ class MyQQBotPlugin(Star):
     async def handle_keyword_reply(self, event: AstrMessageEvent):
         """处理关键词回复功能"""
         message_str = event.message_str
+        logger.info(f"收到消息: {event.unified_msg_origin}: {message_str[:100]}")
 
         # 遍历所有触发器进行匹配和回复
         for trigger in self.triggers:
