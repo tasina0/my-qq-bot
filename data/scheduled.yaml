@@ -1,0 +1,22 @@
+schedules:
+  - schedule: "* * * * *"  # 每分钟
+    tasks:
+      - target: "aiocqhttp:FriendMessage:494941627"  # 接收消息的目标ID
+        send:
+          - text: "测试"
+
+  # - schedule: "0 9 * * *"  # 每天早上9点
+  #   tasks:
+  #     - target: "123456789"  # 接收消息的目标ID
+  #       send:
+  #         - text: "早安"
+  #           images:
+  #             - "https://example.com/morning.jpg"
+  
+  # - schedule: "0 23 * * *"  # 每天晚上11点
+  #   tasks:
+  #     - target: "123456789"  # 接收消息的目标ID
+  #       send:
+  #         - text: "晚安，祝你有个好梦！"
+  #           images:
+  #             - "https://example.com/night.jpg" 
