@@ -15,21 +15,17 @@ class MyQQBotPlugin(Star):
     def __init__(self, context: Context):
         super().__init__(context)
 
-    # =======
-    # 随机图片
-    # =======
-    @llm_tool(name="get_random_image")
-    async def get_random_image(self, event: AstrMessageEvent, category: str = "老婆") -> MessageEventResult:
-        """返回一张随机图片。
+    @llm_tool(name="get_character_picture")
+    async def get_character_picture(self, event: AstrMessageEvent, category: str = "豆豆") -> MessageEventResult:
+        """返回一张指定对象的图片。
 
         Args:
             category(string): 图片分类，可选值为:
 
-                - "老婆"
                 - "豆豆"
         """
         # 检查分类是否正确
-        if category not in ["老婆", "豆豆"]:
+        if category not in ["豆豆"]:
             yield event.plain_result("图片分类错误，请输入正确的分类。")
             return
 
