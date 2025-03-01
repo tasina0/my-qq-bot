@@ -4,11 +4,10 @@ import random
 import yaml
 
 from astrbot.api import llm_tool
-from astrbot.api.event import AstrMessageEvent, event_message_type
-from astrbot.api.all import EventMessageType
+from astrbot.api.event import AstrMessageEvent, MessageEventResult
+from astrbot.api.all import event_message_type, EventMessageType
 from astrbot.api.message_components import Image, Plain
 from astrbot.api.star import Context, Star, register
-from astrbot.core.message.message_event_result import MessageEventResult
 
 source_dir = os.path.abspath(os.path.dirname(__file__))
 
