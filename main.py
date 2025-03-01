@@ -103,5 +103,8 @@ class MyQQBotPlugin(Star):
                     reply_chain.append(Plain(text=answer["text"]))
                 if answer.get("images"):
                     for image_url in answer["images"]:
-                        reply_chain.append(Image.fromURL(url=image_url))
+                        if image_url.startswith(('http://', 'https://')):
+                            reply_chain.append(Image.fromURL(url=image_url))
+                        else:
+                            reply_chain.append(Image.fromLocal(path=image_url))
                 yield event.chain_result(reply_chain)
