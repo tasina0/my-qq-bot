@@ -1,0 +1,79 @@
+/my-qq-bot.zip
+/astrbot
+/images
+
+# Python相关
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyCharm相关
+.idea/
+*.iml
+*.iws
+*.ipr
+.idea_modules/
+out/
+
+# VSCode相关
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+.history/
+
+# 测试相关
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+nosetests.xml
+coverage.xml
+*.cover
+
+# 虚拟环境
+venv/
+env/
+ENV/
+.env
+.venv
+env.bak/
+venv.bak/
+
+# 日志
+*.log
+logs/
+
+# 本地配置
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# 数据库
+*.sqlite3
+*.db
+
+# 其他
+.DS_Store
+Thumbs.db 
