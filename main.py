@@ -15,23 +15,12 @@ class MyQQBotPlugin(Star):
     def __init__(self, context: Context):
         super().__init__(context)
 
-    @llm_tool(name="get_image")
-    async def get_image(self, event: AstrMessageEvent, category: str) -> MessageEventResult:
-        """返回一张图片。
-
-        Args:
-            category(string): 图片分类，可选值为:
-
-                - "豆豆"
-                - "小猫"
+    @llm_tool(name="get_doudou_image")
+    async def get_doudou_image(self, event: AstrMessageEvent) -> MessageEventResult:
+        """返回一张豆豆的照片。
         """
-        # 检查分类是否正确
-        if category not in ["豆豆", "小猫"]:
-            yield event.plain_result("没有找到任何图片。")
-            return
-
         # 获取图片文件夹路径
-        image_folder = f"C:\\my robot\\pictures\\{category}" 
+        image_folder = f"C:\\my robot\\pictures\\豆豆" 
         image_files = [f for f in os.listdir(image_folder) if f.endswith(".jpg")]
         if not image_files:
             yield event.plain_result("没有找到任何图片。")
