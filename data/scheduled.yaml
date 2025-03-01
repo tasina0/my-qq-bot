@@ -15,7 +15,7 @@ schedules:
   
   - schedule: "0 22-23 * * *"  # 每天晚上22-23点之间随机
     tasks:
-      - target: "123456789"  # 接收消息的目标ID
+      - target: "aiocqhttp:FriendMessage:494941627"  # 接收消息的目标ID
         send:
           - text: "晚安！"
             #  images:

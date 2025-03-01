@@ -1,7 +1,8 @@
 triggers:
-  - keyword: "测试代码"
+  - keyword: "早"
     answers:
-      - text: "测试代码1"
-      - text: "测试代码2"
-        images:
-          - "https://pic.52112.com/2020/04/13/JPG-200413_328/gCaPae4zjp_small.jpg"
+      - text: "早哦~"
+      - text: "早安哦"
+      - text: "早上好！"
+        # images:
+        #   - "https://pic.52112.com/2020/04/13/JPG-200413_328/gCaPae4zjp_small.jpg"
