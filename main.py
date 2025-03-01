@@ -9,7 +9,7 @@ import schedule
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.cron import CronTrigger
 
-from astrbot.api import llm_tool
+from astrbot.api import llm_tool, logger
 from astrbot.api.event import AstrMessageEvent, MessageEventResult
 from astrbot.api.all import event_message_type, EventMessageType
 from astrbot.api.message_components import Image, Plain
@@ -172,9 +172,9 @@ class MyQQBotPlugin(Star):
                         id=f"task_{target}_{cron_expression.replace(' ', '_')}"
                     )
                     
-                    self.context.logger.info(f"已添加定时任务: {cron_expression} -> {target}")
+                    logger.info(f"已添加定时任务: {cron_expression} -> {target}")
                 except Exception as e:
-                    self.context.logger.error(f"添加定时任务失败: {cron_expression}, 错误: {str(e)}")
+                    logger.error(f"添加定时任务失败: {cron_expression}, 错误: {str(e)}")
         
         # 启动调度器
         self.scheduler.start()
@@ -218,7 +218,7 @@ class MyQQBotPlugin(Star):
             if reply_chain:
                 try:
                     # 使用 API 发送消息到指定目标
-                    await self.context.api.send_message(target, reply_chain)
-                    self.context.logger.info(f"已发送定时消息到 {target}")
+                    await self.context.send_message(target, reply_chain)
+                    logger.info(f"已发送定时消息到 {target}")
                 except Exception as e:
-                    self.context.logger.error(f"发送定时消息失败: {str(e)}")
+                    logger.error(f"发送定时消息失败: {str(e)}")
