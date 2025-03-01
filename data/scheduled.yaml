@@ -1,22 +1,22 @@
 schedules:
-  - schedule: "* * * * *"  # 每天早上3点
+  - schedule: "0 2-3 * * *"  # 每天早上3点
     tasks:
       - target: "aiocqhttp:GroupMessage:332177382"  # 接收消息的目标ID
         send:
-          - text: "深夜emo时间"   
+          - text: "深夜emotime"   
 
-  # - schedule: "0 8-10 * * *"  # 每天早上8-10点之间随机
-  #   tasks:
-  #     - target: "aiocqhttp:FriendMessage:494941627"  # 接收消息的目标ID
-  #       send:
-  #         - text: "早安"
-  #           # images:
-  #           #   - "https://example.com/morning.jpg"
+  - schedule: "0 8-10 * * *"  # 每天早上8-10点之间随机
+    tasks:
+      - target: "aiocqhttp:FriendMessage:494941627"  # 接收消息的目标ID
+        send:
+          - text: "早安"
+            # images:
+            #   - "https://example.com/morning.jpg"
   
-  # - schedule: "0 22-23 * * *"  # 每天晚上22-23点之间随机
-  #   tasks:
-  #     - target: "123456789"  # 接收消息的目标ID
-  #       send:
-  #         - text: "晚安！"
-  #           #  images:
-  #           #   - "https://example.com/night.jpg" 
+  - schedule: "0 22-23 * * *"  # 每天晚上22-23点之间随机
+    tasks:
+      - target: "123456789"  # 接收消息的目标ID
+        send:
+          - text: "晚安！"
+            #  images:
+            #   - "https://example.com/night.jpg" 
