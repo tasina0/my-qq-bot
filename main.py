@@ -16,17 +16,6 @@ class MyQQBotPlugin(Star):
         super().__init__(context)
 
     # =======
-    # 当前时间
-    # =======
-    @llm_tool(name="get_current_time")  # 如果 name 不填，将使用函数名
-    async def get_current_time(self, event: AstrMessageEvent) -> MessageEventResult:
-        """获取当前时间。"""
-        now = datetime.now()
-        current_time = now.strftime("%Y年%m月%d日 %H点%M分%S秒")
-        resp = f"现在的时间是 {current_time}。"
-        yield event.plain_result(resp)
-
-    # =======
     # 随机图片
     # =======
     @llm_tool(name="get_random_image")
