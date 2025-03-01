@@ -15,9 +15,9 @@ class MyQQBotPlugin(Star):
     def __init__(self, context: Context):
         super().__init__(context)
 
-    @llm_tool(name="get_character_picture")
-    async def get_character_picture(self, event: AstrMessageEvent, category: str = "豆豆") -> MessageEventResult:
-        """返回一张指定对象的图片。
+    @llm_tool(name="get_image")
+    async def get_image(self, event: AstrMessageEvent, category: str = "豆豆") -> MessageEventResult:
+        """返回一张图片。
 
         Args:
             category(string): 图片分类，可选值为:
