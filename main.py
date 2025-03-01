@@ -26,7 +26,7 @@ class MyQQBotPlugin(Star):
         """
         # 检查分类是否正确
         if category not in ["豆豆"]:
-            yield event.plain_result("图片分类错误，请输入正确的分类。")
+            yield event.plain_result("没有找到任何图片。")
             return
 
         # 获取图片文件夹路径
@@ -40,8 +40,6 @@ class MyQQBotPlugin(Star):
         random_image = random.choice(image_files)
         image_path = os.path.join(image_folder, random_image)
         chain = [
-            Plain("来看这个图："),
             Image.fromFileSystem(image_path),
-            Plain("这是一个随机图片。"),
         ]
         yield event.chain_result(chain)
