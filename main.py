@@ -45,7 +45,7 @@ class MyQQBotPlugin(Star):
             return
 
         # 获取图片文件夹路径
-        image_folder = f"images/{category}"
+        image_folder = f"D:\\projects\\my-qq-bot\\images\\{category}"
         image_files = [f for f in os.listdir(image_folder) if f.endswith(".jpg")]
         if not image_files:
             yield event.plain_result("没有找到任何图片。")
