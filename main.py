@@ -164,7 +164,7 @@ class MyQQBotPlugin(Star):
                         # 使用关键词回复模块处理问候，并将结果传递给用户
                         async for result in self.keyword_module.handle_keyword_reply(event):
                             yield result
-                        return  # 处理完成后返回，不执行后续代码
+                    return  # 处理完成后返回，不执行后续代码
                 
             except Exception as e:
                 # 捕获并打印处理过程中的任何异常
