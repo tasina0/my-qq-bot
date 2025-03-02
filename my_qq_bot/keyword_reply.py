@@ -43,7 +43,6 @@ class KeywordReplyModule:
             data = yaml.safe_load(f)
             self.triggers = data.get("triggers", [])
 
-    @event_message_type(EventMessageType.ALL)
     async def handle_keyword_reply(self, event: AstrMessageEvent):
         """处理关键词回复功能"""
         message_str = event.message_str

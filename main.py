@@ -157,15 +157,15 @@ class MyQQBotPlugin(Star):
                 elif message_type == "问候":
                     # 根据具体问候类型向用户发送相应反馈
                     if "早安" in message_str:
-                        yield event.plain_result("检测到早安问候，早安呀~")
+                        yield event.plain_result("早安~")
                     elif "晚安" in message_str:
-                        yield event.plain_result("检测到晚安问候，晚安啦~")
-                    
-                    # 使用关键词回复模块处理问候，并将结果传递给用户
-                    async for result in self.keyword_module.handle_keyword_reply(event):
-                        yield result
-                    return  # 处理完成后返回，不执行后续代码
-            
+                        yield event.plain_result("晚安~")
+                    else:
+                        # 使用关键词回复模块处理问候，并将结果传递给用户
+                        async for result in self.keyword_module.handle_keyword_reply(event):
+                            yield result
+                        return  # 处理完成后返回，不执行后续代码
+                
             except Exception as e:
                 # 捕获并打印处理过程中的任何异常
                 print(f"处理LLM判断结果时出错: {e}")
