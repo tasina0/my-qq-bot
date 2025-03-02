@@ -1,4 +1,5 @@
 import os
+import random
 import sys
 import json
 
@@ -181,8 +182,6 @@ class MyQQBotPlugin(Star):
                         message_type = "豆豆照片请求"
                     elif "小豆照片请求" in response_text:
                         message_type = "小豆照片请求"
-                    elif "问候" in response_text:
-                        message_type = "问候"
                 
                 # 输出最终分类结果，用于调试
                 print(f"分类结果: {message_type}, 理由: {reason}")
@@ -202,15 +201,15 @@ class MyQQBotPlugin(Star):
 
                 elif message_type == "早安":
                     # 根据具体问候类型向用户发送相应反馈
-                    yield event.plain_result("早安~")
+                    yield event.plain_result(random.choice(["早安~", "早上好~"]))
                     return  # 处理完成后返回，不执行后续代码
                 
                 elif message_type == "午安":
-                    yield event.plain_result("午安~")
+                    yield event.plain_result(random.choice(["午安~", "中午好~"]))
                     return  # 处理完成后返回，不执行后续代码
                 
                 elif message_type == "晚安":
-                    yield event.plain_result("晚安~")
+                    yield event.plain_result(random.choice(["晚安~", "晚上好~"]))
                     return  # 处理完成后返回，不执行后续代码
                 
             except Exception as e:
