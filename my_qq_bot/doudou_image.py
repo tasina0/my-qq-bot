@@ -20,7 +20,7 @@ class DoudouImageModule:
     async def get_image(self, event: AstrMessageEvent, category: str) -> MessageEventResult:
         """返回指定类别的一张图片。"""
         # 验证 category 防止注入攻击
-        if (not os.path.isdir(self.root_dir)) or (category not in os.path.listdir(self.root_dir)):
+        if (not os.path.isdir(self.root_dir)) or (category not in os.listdir(self.root_dir)):
             yield event.plain_result(f"类别 '{category}' 不存在。")
             return
 
