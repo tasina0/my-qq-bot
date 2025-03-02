@@ -42,6 +42,34 @@ class MyQQBotPlugin(Star):
         # 初始化定时任务模块 - 用于处理定时执行的任务
         self.scheduled_module = ScheduledTaskModule(context, source_dir)
 
+    def is_at_me(self, message_obj):
+        """
+        检查消息是否@了机器人自己
+        
+        参数:
+            message_obj: 消息对象
+            
+        返回:
+            bool: 如果消息@了机器人则返回True，否则返回False
+        """
+        for i, msg_component in enumerate(message_obj.message):
+            # 打印每个消息组件的详细信息，帮助调试
+            component_type = msg_component.__class__.__name__
+            print(f"消息组件[{i}]: 类型={component_type}, 内容={msg_component}")
+            
+            # 检查消息组件是否为At类型，且@的是机器人自己
+            if component_type == "At":
+                try:
+                    at_qq = getattr(msg_component, "qq", None)
+                    print(f"发现At组件，目标QQ: {at_qq}, 机器人QQ: {message_obj.self_id}")
+                    if at_qq == message_obj.self_id:
+                        print("确认@了机器人自己")
+                        return True
+                except Exception as e:
+                    print(f"处理At组件时出错: {e}")
+        
+        return False
+
     # 使用装饰器注册消息处理函数，处理所有类型的消息事件
     @event_message_type(EventMessageType.ALL)
     async def handle_message(self, event: AstrMessageEvent):
@@ -59,6 +87,28 @@ class MyQQBotPlugin(Star):
         """
         # 获取用户发送的原始消息文本
         message_str = event.message_str
+
+        # 获取消息对象
+        message_obj = event.message_obj
+        
+        # 调试信息：打印消息结构
+        print(f"消息类型: {message_obj.type}")
+        print(f"机器人ID: {message_obj.self_id}")
+        print(f"会话ID: {message_obj.session_id}")
+        print(f"消息ID: {message_obj.message_id}")
+        print(f"群组ID: {message_obj.group_id}")
+        print(f"发送者: {message_obj.sender}")
+        print(f"消息内容: {message_str}")
+        print(f"消息组件列表: {message_obj.message}")
+        
+        if message_obj.group_id:
+            # 检查群消息是否@了机器人
+            is_at_me = self.is_at_me(message_obj)
+            
+            # 如果是群消息且没有@机器人，则不处理该消息
+            if not is_at_me:
+                print(f"群消息未@机器人，忽略处理: {message_str}")
+                return
         
         # 获取LLM工具管理器，用于后续可能的LLM工具调用
         func_tools_mgr = self.context.get_llm_tool_manager()
@@ -78,8 +128,10 @@ class MyQQBotPlugin(Star):
         你是一个消息分类助手，需要判断用户消息是否符合以下预定义类型之一：
         1. "豆豆照片请求" - 用户想看豆豆(一只猫)的照片
         2. "小豆照片请求" - 用户想看小豆(一只猫)的照片
-        3. "问候" - 消息中包含"早安"或"晚安"等问候语
-        4. "其他" - 不符合以上任何类型
+        3. "早安" - 消息是早晨打招呼
+        4. "午安" - 消息是中午打招呼
+        5. "晚安" - 消息是晚上打招呼
+        6. "其他" - 不符合以上任何类型
         
         必须严格按照以下JSON格式返回，不要添加其他内容：
         {"分类":"类型名称","理由":"简短理由"}
@@ -137,33 +189,28 @@ class MyQQBotPlugin(Star):
                 
                 # 根据分类结果调用相应的处理模块
                 if message_type == "豆豆照片请求":
-                    # 先向用户发送反馈，确认已识别请求类型
-                    yield event.plain_result(f"检测到您想看豆豆的照片，马上为您安排~")
-                    
                     # 使用通用的get_image方法处理豆豆照片请求，传递"豆豆"类别
                     async for result in self.doudou_module.get_image(event, "豆豆"):
                         yield result
                     return  # 处理完成后返回，不执行后续代码
                 
                 elif message_type == "小豆照片请求":
-                    # 先向用户发送反馈，确认已识别请求类型
-                    yield event.plain_result(f"检测到您想看小豆的照片，马上为您安排~")
-                    
                     # 使用通用的get_image方法处理小豆照片请求，传递"小豆"类别
                     async for result in self.doudou_module.get_image(event, "小豆"):
                         yield result
                     return  # 处理完成后返回，不执行后续代码
-                
-                elif message_type == "问候":
+
+                elif message_type == "早安":
                     # 根据具体问候类型向用户发送相应反馈
-                    if "早安" in message_str:
-                        yield event.plain_result("早安~")
-                    elif "晚安" in message_str:
-                        yield event.plain_result("晚安~")
-                    else:
-                        # 使用关键词回复模块处理问候，并将结果传递给用户
-                        async for result in self.keyword_module.handle_keyword_reply(event):
-                            yield result
+                    yield event.plain_result("早安~")
+                    return  # 处理完成后返回，不执行后续代码
+                
+                elif message_type == "午安":
+                    yield event.plain_result("午安~")
+                    return  # 处理完成后返回，不执行后续代码
+                
+                elif message_type == "晚安":
+                    yield event.plain_result("晚安~")
                     return  # 处理完成后返回，不执行后续代码
                 
             except Exception as e:
