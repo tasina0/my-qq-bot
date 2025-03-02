@@ -14,7 +14,8 @@ class DoudouImageModule:
 
     def __init__(self, context):
         self.context = context
-        self.root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../images'))
+        # self.root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../images'))
+        self.root_dir = r'C:\my robot\pictures'
 
     async def get_image(self, event: AstrMessageEvent, category: str) -> MessageEventResult:
         """返回指定类别的一张图片。"""
