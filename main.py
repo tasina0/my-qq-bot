@@ -62,7 +62,7 @@ class MyQQBotPlugin(Star):
                 try:
                     at_qq = getattr(msg_component, "qq", None)
                     print(f"发现At组件，目标QQ: {at_qq}, 机器人QQ: {message_obj.self_id}")
-                    if at_qq == message_obj.self_id:
+                    if str(at_qq) == str(message_obj.self_id):
                         print("确认@了机器人自己")
                         return True
                 except Exception as e:
