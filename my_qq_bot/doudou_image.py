@@ -6,7 +6,7 @@ import os
 import random
 
 from astrbot.api.event import AstrMessageEvent, MessageEventResult
-from astrbot.api.message_components import Image, Plain
+from astrbot.api.message_components import Image
 
 
 class DoudouImageModule:

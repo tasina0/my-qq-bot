@@ -4,8 +4,8 @@ import json
 
 # 导入AstrBot框架相关API
 from astrbot.api import llm_tool  # 导入大语言模型工具
-from astrbot.api.event import AstrMessageEvent, MessageEventResult  # 导入消息事件相关类
-from astrbot.api.all import event_message_type, EventMessageType, filter  # 导入事件类型和过滤器
+from astrbot.api.event import AstrMessageEvent  # 导入消息事件相关类
+from astrbot.api.all import event_message_type, EventMessageType  # 导入事件类型和过滤器
 from astrbot.api.star import Context, Star, register  # 导入插件注册和上下文管理相关类
 
 # 获取当前脚本所在目录的绝对路径
